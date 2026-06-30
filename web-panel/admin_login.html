@@ -13,54 +13,45 @@
             <h1><i class="fas fa-user-shield"></i> ADMIN SECURE</h1>
             <p>Authorized Access Only</p>
         </header>
-
         <div class="card login-card">
-            <div id="admin-login-form">
-                <div class="input-group">
-                    <i class="fas fa-user-lock"></i>
-                    <input type="text" id="admin-username" placeholder="Admin Username">
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-key"></i>
-                    <input type="password" id="admin-password" placeholder="Admin Password">
-                </div>
-                <button type="button" onclick="handleAdminLogin()" class="btn-primary">VERIFY ADMIN</button>
-                <p id="admin-login-error" class="error-text"></p>
+            <div class="input-group">
+                <i class="fas fa-user-lock"></i>
+                <input type="text" id="admin-username" placeholder="Admin Username">
             </div>
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="password" id="admin-password" placeholder="Admin Password">
+            </div>
+            <button type="button" onclick="login()" class="btn-primary">VERIFY ADMIN</button>
+            <p id="error" class="error-text"></p>
         </div>
-
         <footer>
             <button onclick="window.location.href='index.html'" class="btn-secondary">BACK TO USER PANEL</button>
         </footer>
     </div>
-
     <script>
-        async function handleAdminLogin() {
-            const u = document.getElementById('admin-username').value;
-            const p = document.getElementById('admin-password').value;
-            const err = document.getElementById('admin-login-error');
-
-            err.textContent = "Verifying...";
-
-            try {
-                const res = await fetch('/api/admin/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username: u, password: p })
-                });
-
-                const data = await res.json();
-
+        function login() {
+            var u = document.getElementById('admin-username').value;
+            var p = document.getElementById('admin-password').value;
+            var e = document.getElementById('error');
+            e.textContent = "Checking...";
+            fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: u, password: p })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
                 if (data.success) {
                     localStorage.setItem('adminToken', data.token);
                     window.location.href = 'admin.html';
                 } else {
-                    err.textContent = data.error || "Login Failed";
+                    e.textContent = data.error || "Login Failed";
                 }
-            } catch (e) {
-                console.error(e);
-                err.textContent = "Connection Error: Check Console";
-            }
+            })
+            .catch(function(err) {
+                e.textContent = "Error: " + err.message;
+            });
         }
     </script>
 </body>

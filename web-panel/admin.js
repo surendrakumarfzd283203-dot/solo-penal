@@ -82,7 +82,7 @@ async function loadUsers() {
 async function deleteUser(id) {
     if (!confirm("Are you sure you want to delete this user?")) return;
     try {
-        await fetch(\`/api/admin/delete-user/\${id}\`, {
+        await fetch('/api/admin/delete-user/' + id, {
             method: 'DELETE',
             headers: { 'Authorization': localStorage.getItem('adminToken') }
         });
