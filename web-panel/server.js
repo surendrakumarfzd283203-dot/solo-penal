@@ -87,7 +87,7 @@ app.post('/api/login', async (req, res) => {
     res.json({ success: true, user });
 });
 
-app.get('(.*)', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
