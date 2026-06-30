@@ -29,12 +29,18 @@ const adminSchema = new mongoose.Schema({
 });
 const Admin = mongoose.model('Admin', adminSchema);
 
-// Initial Admin Setup (If not exists)
+// Initial Admin Setup
 async function initAdmin() {
-    const count = await Admin.countDocuments();
-    if (count === 0) {
-        await Admin.create({ username: 'sagar', password: 'Vivek321' });
-        console.log('Default Admin Created: sagar / Vivek321');
+    try {
+        // Upsert admin: agar 'sagar' nahi hai toh banayega, agar hai toh update karega
+        await Admin.findOneAndUpdate(
+            { username: 'sagar' },
+            { password: 'Vivek321' },
+            { upsert: true, new: true }
+        );
+        console.log('Admin Account Sync: sagar / Vivek321');
+    } catch (err) {
+        console.error('Admin Init Error:', err.message);
     }
 }
 initAdmin();
