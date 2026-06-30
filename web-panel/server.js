@@ -7,12 +7,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
+// Removed duplicate connection call
 // MongoDB Atlas Configuration
 const MONGODB_URI = 'mongodb+srv://sachinku1259_db_user:Va9AEm8sLgW0mgG0@cluster0.kgokl91.mongodb.net/solo_penal?retryWrites=true&w=majority';
-
-mongoose.connect(MONGODB_URI)
-.then(() => console.log('Connected to MongoDB Atlas'))
-.catch(err => console.error('DB Error:', err.message));
 
 // Models
 const userSchema = new mongoose.Schema({
@@ -32,29 +29,43 @@ const Admin = mongoose.model('Admin', adminSchema);
 // Initial Admin Setup
 async function initAdmin() {
     try {
-        // Upsert admin: agar 'sagar' nahi hai toh banayega, agar hai toh update karega
+        console.log('Syncing Admin Account...');
         await Admin.findOneAndUpdate(
             { username: 'sagar' },
             { password: 'Vivek321' },
             { upsert: true, new: true }
         );
-        console.log('Admin Account Sync: sagar / Vivek321');
+        console.log('✅ Admin Sync Complete: sagar / Vivek321');
     } catch (err) {
-        console.error('Admin Init Error:', err.message);
+        console.error('❌ Admin Init Error:', err.message);
     }
 }
-initAdmin();
+
+mongoose.connect(MONGODB_URI)
+.then(() => {
+    console.log('✅ Connected to MongoDB Atlas');
+    initAdmin();
+})
+.catch(err => console.error('❌ DB Error:', err.message));
 
 // --- ADMIN API ---
 
 // Admin Login
 app.post('/api/admin/login', async (req, res) => {
-    const { username, password } = req.body;
-    const admin = await Admin.findOne({ username, password });
-    if (admin) {
-        res.json({ success: true, token: 'secret-admin-token' }); // Simple token for demo
-    } else {
-        res.status(401).json({ success: false, error: 'Invalid Admin Credentials' });
+    console.log('Login attempt for:', req.body.username);
+    try {
+        const { username, password } = req.body;
+        const admin = await Admin.findOne({ username, password });
+        if (admin) {
+            console.log('✅ Admin login successful');
+            res.json({ success: true, token: 'secret-admin-token' });
+        } else {
+            console.log('❌ Invalid credentials');
+            res.status(401).json({ success: false, error: 'Invalid Admin Credentials' });
+        }
+    } catch (err) {
+        console.error('Login API Error:', err.message);
+        res.status(500).json({ success: false, error: 'Server Error' });
     }
 });
 
