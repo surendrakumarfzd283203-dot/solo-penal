@@ -24,7 +24,7 @@
                     <i class="fas fa-key"></i>
                     <input type="password" id="admin-password" placeholder="Admin Password">
                 </div>
-                <button onclick="adminLogin()" class="btn-primary">VERIFY ADMIN</button>
+                <button type="button" onclick="handleAdminLogin()" class="btn-primary">VERIFY ADMIN</button>
                 <p id="admin-login-error" class="error-text"></p>
             </div>
         </div>
@@ -35,29 +35,31 @@
     </div>
 
     <script>
-        async function adminLogin() {
-            const username = document.getElementById('admin-username').value;
-            const password = document.getElementById('admin-password').value;
-            const errorEl = document.getElementById('admin-login-error');
+        async function handleAdminLogin() {
+            const u = document.getElementById('admin-username').value;
+            const p = document.getElementById('admin-password').value;
+            const err = document.getElementById('admin-login-error');
 
-            errorEl.textContent = "";
+            err.textContent = "Verifying...";
 
             try {
-                const response = await fetch('/api/admin/login', {
+                const res = await fetch('/api/admin/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
+                    body: JSON.stringify({ username: u, password: p })
                 });
-                const data = await response.json();
+
+                const data = await res.json();
 
                 if (data.success) {
                     localStorage.setItem('adminToken', data.token);
                     window.location.href = 'admin.html';
                 } else {
-                    errorEl.textContent = data.error;
+                    err.textContent = data.error || "Login Failed";
                 }
-            } catch (err) {
-                errorEl.textContent = "Server Connection Error";
+            } catch (e) {
+                console.error(e);
+                err.textContent = "Connection Error: Check Console";
             }
         }
     </script>
