@@ -1,18 +1,15 @@
-document.getElementById('btn-login').addEventListener('click', async () => {
-    const userId = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const errorEl = document.getElementById('login-error');
-
+document.getElementById('btn-login').addEventListener('click', async function() {
+    var userId = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var errorEl = document.getElementById('login-error');
     errorEl.textContent = "";
-
     try {
-        const response = await fetch('/api/login', {
+        var response = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, password })
+            body: JSON.stringify({ userId: userId, password: password })
         });
-        const data = await response.json();
-
+        var data = await response.json();
         if (data.success) {
             showDashboard(data.user);
         } else {
@@ -27,23 +24,19 @@ function showDashboard(user) {
     document.querySelector('.login-card').style.display = 'none';
     document.querySelector('header p').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
-
     document.getElementById('display-username').textContent = user.userId;
     document.getElementById('expiry-time').textContent = new Date(user.expiry).toLocaleString();
-
-    // Simulate ping
-    setInterval(() => {
-        const ping = Math.floor(Math.random() * 20) + 15;
+    setInterval(function() {
+        var ping = Math.floor(Math.random() * 20) + 15;
         document.getElementById('ping').textContent = ping + "ms";
     }, 3000);
 }
 
-document.getElementById('btn-logout').addEventListener('click', () => {
+document.getElementById('btn-logout').addEventListener('click', function() {
     window.location.reload();
 });
 
-// Feature toggles
-const toggles = [
+var toggles = [
     'esp-toggle',
     'aimbot-toggle',
     'headshot-toggle',
@@ -53,9 +46,12 @@ const toggles = [
     'antenna-toggle',
     'medkit-toggle'
 ];
-toggles.forEach(id => {
-    const el = document.getElementById(id);
-    el.addEventListener('change', (e) => {
-        console.log(\`\${id} set to \${e.target.checked}\`);
-    });
+
+toggles.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.addEventListener('change', function(e) {
+            console.log(id + " set to " + e.target.checked);
+        });
+    }
 });
