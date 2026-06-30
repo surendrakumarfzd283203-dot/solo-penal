@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Penal - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <header>
+            <h1><i class="fas fa-crosshairs"></i> SOLO PENAL</h1>
+            <p>Enter Credentials to Access Dashboard</p>
+        </header>
+
+        <div class="card login-card">
+            <div id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="User ID">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password">
+                </div>
+                <button id="btn-login" class="btn-primary">LOGIN NOW</button>
+                <p id="login-error" class="error-text"></p>
+            </div>
+        </div>
+
+        <div id="dashboard" style="display:none;">
+            <header>
+                <h2><i class="fas fa-fire"></i> FREE FIRE DASHBOARD</h2>
+                <div class="user-stats">
+                    <p id="user-info">Welcome, <span id="display-username">User</span></p>
+                    <p>Status: <span class="status-active">ONLINE</span> | Expiry: <span id="expiry-time">Loading...</span></p>
+                </div>
+            </header>
+
+            <section class="system-status card">
+                <h3><i class="fas fa-server"></i> System Status</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span>Game Version:</span>
+                        <span class="version-tag">OB44 (LATEST)</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Anti-Ban:</span>
+                        <span class="status-active">PROTECTED</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Server Latency:</span>
+                        <span id="ping">24ms</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features">
+                <h2><i class="fas fa-cog"></i> Mod Features</h2>
+                <div class="grid">
+                    <div class="card feature-card">
+                        <div class="card-info">
+                            <i class="fas fa-eye"></i>
+                            <h3>Enemy Location (ESP)</h3>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="esp-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-info">
+                            <i class="fas fa-bullseye"></i>
+                            <h3>Aimbot</h3>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="aimbot-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-info">
+                            <i class="fas fa-skull"></i>
+                            <h3>Auto Headshot</h3>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="headshot-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-info">
+                            <i class="fas fa-wind"></i>
+                            <h3>No Recoil</h3>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="recoil-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-info">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Speed Hack</h3>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="speed-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-info">
+                            <i class="fas fa-ghost"></i>
+                            <h3>Ghost Mode</h3>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="ghost-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-info">
+                            <i class="fas fa-signal"></i>
+                            <h3>Antenna Head</h3>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="antenna-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="card feature-card">
+                        <div class="card-info">
+                            <i class="fas fa-medkit"></i>
+                            <h3>Medkit Run</h3>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="medkit-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <button id="btn-logout" class="btn-secondary">LOGOUT</button>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Solo Penal. All Rights Reserved.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

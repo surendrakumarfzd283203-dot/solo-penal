@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Solo Penal</string>
+    <string name="start_panel">Start Panel</string>
+    <string name="headshot_penal">Headshot Penal</string>
+    <string name="aimbot">Aimbot</string>
+    <string name="auto_headshot">Auto Headshot</string>
+    <string name="no_recoil">No Recoil</string>
+    <string name="close">Close</string>
+</resources>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Penal - Admin Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="admin-login-page">
+    <div class="login-container">
+        <header>
+            <h1><i class="fas fa-user-shield"></i> ADMIN SECURE</h1>
+            <p>Authorized Access Only</p>
+        </header>
+
+        <div class="card login-card">
+            <div id="admin-login-form">
+                <div class="input-group">
+                    <i class="fas fa-user-lock"></i>
+                    <input type="text" id="admin-username" placeholder="Admin Username">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="admin-password" placeholder="Admin Password">
+                </div>
+                <button onclick="adminLogin()" class="btn-primary">VERIFY ADMIN</button>
+                <p id="admin-login-error" class="error-text"></p>
+            </div>
+        </div>
+
+        <footer>
+            <button onclick="window.location.href='index.html'" class="btn-secondary">BACK TO USER PANEL</button>
+        </footer>
+    </div>
+
+    <script>
+        async function adminLogin() {
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+            const errorEl = document.getElementById('admin-login-error');
+
+            errorEl.textContent = "";
+
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    localStorage.setItem('adminToken', data.token);
+                    window.location.href = 'admin.html';
+                } else {
+                    errorEl.textContent = data.error;
+                }
+            } catch (err) {
+                errorEl.textContent = "Server Connection Error";
+            }
+        }
+    </script>
+</body>
+</html>

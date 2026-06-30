@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>solo Penal - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .logout-link {
+            color: var(--secondary-color);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="admin-page">
+    <div id="auth-check" style="display:none;">
+        <div class="container">
+            <header>
+                <div class="admin-controls">
+                    <h1><i class="fas fa-user-shield"></i> ADMIN PANEL</h1>
+                    <span onclick="adminLogout()" class="logout-link">Logout Admin</span>
+                </div>
+                <p>Advanced User Control Center</p>
+            </header>
+
+            <section class="admin-section">
+                <div class="card">
+                    <h3><i class="fas fa-plus-circle"></i> Create New Member</h3>
+                    <div class="admin-form">
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="new-userid" placeholder="Enter User ID">
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="text" id="new-password" placeholder="Enter Password">
+                        </div>
+                        <div class="duration-group">
+                            <label><i class="fas fa-calendar-alt"></i> Expiry (Days):</label>
+                            <input type="number" id="expiry-days" value="1" min="1">
+                        </div>
+                        <button onclick="createUser()" class="btn-primary">GENERATE ACCESS KEY</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="user-list-section">
+                <h2><i class="fas fa-users"></i> Active Subscriptions</h2>
+                <div id="users-container" class="grid">
+                    <!-- User cards will be loaded here -->
+                </div>
+            </section>
+
+            <footer>
+                <p>&copy; 2024 Solo Penal Admin. All Rights Reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Security Check
+        if (!localStorage.getItem('adminToken')) {
+            window.location.href = 'admin_login.html';
+        } else {
+            document.getElementById('auth-check').style.display = 'block';
+        }
+
+        function adminLogout() {
+            localStorage.removeItem('adminToken');
+            window.location.href = 'admin_login.html';
+        }
+    </script>
+    <script src="admin.js"></script>
+</body>
+</html>
