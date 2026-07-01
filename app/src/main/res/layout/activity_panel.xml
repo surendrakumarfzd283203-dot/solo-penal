@@ -9,8 +9,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/headshot_penal"
-        android:textColor="#FFFFFF"
+        android:text="SOLO PENAL MOD"
+        android:textColor="#ff9d00"
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -21,103 +21,65 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Enemy Location (ESP)"
-        android:textColor="#FFEB3B"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/aimbot"
+        android:text="Aimbot"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="8dp"/>
 
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/auto_headshot"
+        android:text="Auto Headshot"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="8dp"/>
 
     <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_recoil"
+        android:text="No Recoil"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Speed Hack"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ghost Mode"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Antenna Head"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"/>
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Medkit Run"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GAMES"
-        android:textColor="#00f2ff"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="12dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginBottom="16dp">
-
-        <LinearLayout
-            android:id="@+id/layoutRummy"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@mipmap/ic_launcher"
-                android:scaleType="centerCrop"
-                android:background="#333"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RUMMY"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutBigSmall"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@mipmap/ic_launcher"
-                android:scaleType="centerCrop"
-                android:background="#333"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BIG SMALL"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/btnClose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/close"
-        android:layout_marginTop="16dp"/>
+        android:text="HIDE PANEL"
+        android:backgroundTint="#ff9d00"
+        android:textColor="#000" />
 
 </LinearLayout>
