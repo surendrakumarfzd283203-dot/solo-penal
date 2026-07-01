@@ -1,6 +1,8 @@
 package com.solopenal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,11 +26,19 @@ public class MainActivity extends AppCompatActivity {
     private EditText etUserKey, etPassword;
     private TextView tvStatus;
     private RequestQueue requestQueue;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferences = getSharedPreferences("SoloPenalPrefs", Context.MODE_PRIVATE);
+        
+        // Auto-login check
+        if (sharedPreferences.getBoolean("isLoggedIn", false)) {
+            checkAndStartPanel();
+        }
 
         etUserKey = findViewById(R.id.etUserKey);
         etPassword = findViewById(R.id.etPassword);
@@ -41,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             String password = etPassword.getText().toString().trim();
 
             if (userId.isEmpty() || password.isEmpty()) {
-                tvStatus.setText("Please enter User ID and Password");
+                tvStatus.setText("Enter credentials!");
                 return;
             }
 
@@ -50,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performLogin(String userId, String password) {
-        tvStatus.setText("Verifying access...");
+        tvStatus.setText("Connecting to server...");
         String url = "https://solo-penal.onrender.com/api/login";
 
         JSONObject loginData = new JSONObject();
@@ -66,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         if (response.getBoolean("success")) {
                             tvStatus.setText("Login Success!");
+                            sharedPreferences.edit().putBoolean("isLoggedIn", true).apply();
                             checkAndStartPanel();
                         } else {
                             tvStatus.setText(response.getString("error"));
@@ -75,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 },
                 error -> {
-                    tvStatus.setText("Server Error: Check Connection");
+                    tvStatus.setText("Server Error: Check your connection");
                 });
 
         requestQueue.add(request);
@@ -84,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkAndStartPanel() {
         if (checkPermission()) {
             startService(new Intent(MainActivity.this, FloatingService.class));
-            finish(); // Close login activity after starting panel
+            finish();
         } else {
             requestPermission();
         }
@@ -113,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 startService(new Intent(MainActivity.this, FloatingService.class));
                 finish();
             } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission required for overlay", Toast.LENGTH_SHORT).show();
             }
         }
     }

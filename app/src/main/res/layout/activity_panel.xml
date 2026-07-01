@@ -22,24 +22,26 @@
         android:layout_height="wrap_content"
         android:text="Enemy Location (ESP)"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 
     <Switch
+        android:id="@+id/switchAimbot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Aimbot"
+        android:text="Aimlock (Enemy Head)"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="8dp"/>
 
     <Switch
+        android:id="@+id/switchHeadshot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Auto Headshot"
+        android:text="Auto Headshot (All Guns)"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="8dp"/>
 
     <Switch
+        android:id="@+id/switchRecoil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="No Recoil"
@@ -47,32 +49,12 @@
         android:layout_marginBottom="8dp"/>
 
     <Switch
+        android:id="@+id/switchSpeed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Speed Hack"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="8dp"/>
-
-    <Switch
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ghost Mode"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="8dp"/>
-
-    <Switch
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Antenna Head"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="8dp"/>
-
-    <Switch
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Medkit Run"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="16dp"/>
 
     <Button
         android:id="@+id/btnClose"
@@ -80,6 +62,7 @@
         android:layout_height="wrap_content"
         android:text="HIDE PANEL"
         android:backgroundTint="#ff9d00"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:layout_marginTop="16dp" />
 
 </LinearLayout>
